@@ -6,7 +6,10 @@ use App\Models\AttendanceForm;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response; 
+use Illuminate\Http\Response;
+
+use Spatie\GoogleCalendar\Event;
+use Carbon\Carbon;
 
 class AttendanceFormController extends Controller
 {
@@ -38,13 +41,25 @@ class AttendanceFormController extends Controller
             '入力者' => 'required',
             '入力日' => 'required|date',
         ]);
+    
+        $request->user()->attendanceforms()->create($validated);
+    
+        $event = new Event();
+        $startDate = Carbon::parse($request->input('日付'));
+        $endDate = $startDate->copy()->endOfDay();
 
-        $request->user()->attendanceforms()->create($validated);//creating a record that will belong to the logged in user by leveraging a attendanceforms relationship (to be defined soon!)
-
+        Event::create([
+            'name' => $request->input('入力者'), // 入力者
+            'startDate' => $startDate, // 日付 (Carbon instance)
+            'endDate' => $endDate, // whole day event (Carbon instance)
+            'description' => $request->input('種別') . "\n" . $request->input('その他備考'), // 種別 + \n + その他備考
+            'colorId' => '6', // Orange color
+            'visibility' => 'default',
+            'status' => 'confirmed',
+        ]);
 
         return redirect(route('attendanceforms.index'));
     }
-
     /**
      * Display the specified resource.
      */
