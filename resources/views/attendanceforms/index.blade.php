@@ -10,7 +10,8 @@
                 <option value="オプション２">オプション２</option>
                 <option value="オプション３">オプション３</option>
             </x-dropdown-list>
-            
+
+                        
             <x-input-field name="その他備考" for="その他備考" label="その他備考:" type="text" rows="4" maxlength="1000"></x-input-field>
             
             <x-input-field name="入力者" for="入力者" label="入力者:" type="text"></x-input-field>
