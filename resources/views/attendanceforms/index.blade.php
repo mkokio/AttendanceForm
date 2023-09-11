@@ -9,6 +9,7 @@
                 <option value="オプション１">オプション１</option>
                 <option value="オプション２">オプション２</option>
                 <option value="オプション３">オプション３</option>
+                <!-- Unlike some frameworks, Laravel can't directly retrieve enum values from a database schema enum column -->
             </x-dropdown-list>
 
                         
