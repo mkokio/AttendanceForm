@@ -1,6 +1,6 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
+        <h2 class="text-lg font-weight-medium text-gray-900">
             {{ __('Update Password') }}
         </h2>
 
@@ -9,29 +9,29 @@
         </p>
     </header>
 
-    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('password.update') }}" class="mt-4 space-y-4">
         @csrf
         @method('put')
 
-        <div>
-            <x-input-label for="current_password" :value="__('Current Password')" />
-            <x-text-input id="current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+        <div class="mb-3">
+            <label for="current_password" class="form-label">{{ __('Current Password') }}</label>
+            <input id="current_password" name="current_password" type="password" class="form-control mt-1" autocomplete="current-password" />
+            <x-input-error class="mt-2" :messages="$errors->updatePassword->get('current_password')" />
         </div>
 
-        <div>
-            <x-input-label for="password" :value="__('New Password')" />
-            <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+        <div class="mb-3">
+            <label for="password" class="form-label">{{ __('New Password') }}</label>
+            <input id="password" name="password" type="password" class="form-control mt-1" autocomplete="new-password" />
+            <x-input-error class="mt-2" :messages="$errors->updatePassword->get('password')" />
         </div>
 
-        <div>
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input id="password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
+        <div class="mb-3">
+            <label for="password_confirmation" class="form-label">{{ __('Confirm Password') }}</label>
+            <input id="password_confirmation" name="password_confirmation" type="password" class="form-control mt-1" autocomplete="new-password" />
+            <x-input-error class="mt-2" :messages="$errors->updatePassword->get('password_confirmation')" />
         </div>
 
-        <div class="flex items-center gap-4">
+        <div class="d-flex align-items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
             @if (session('status') === 'password-updated')
