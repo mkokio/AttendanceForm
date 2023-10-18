@@ -1,10 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <!-- Logo -->
-        <a class="navbar-brand" href="{{ route('dashboard') }}">
-            <x-application-logo class="h-9 w-auto text-gray-800" />
-        </a>
-
+        <x-application-logo class="h-9 w-auto text-gray-800" />
+        
         <!-- Toggler Button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -13,11 +11,6 @@
         <!-- Navigation Links -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('ダッシュボード') }}
-                    </x-nav-link>
-                </li>
                 <li class="nav-item">
                     <x-nav-link :href="route('attendanceforms.index')" :active="request()->routeIs('attendanceforms.index')">
                         {{ __('勤怠事前報告フォーム') }}
