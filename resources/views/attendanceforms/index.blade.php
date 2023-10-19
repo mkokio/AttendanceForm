@@ -12,8 +12,17 @@
                 <option value="その他">その他</option>
             </x-dropdown-list>
 
-            <x-input-field name="その他備考" for="その他備考" label="その他備考:" type="text" rows="4" maxlength="1000"></x-input-field>
-
+            <x-input-field name="その他備考" for="その他備考" label="その他備考:" type="text" rows="4" maxlength="1000">
+                有休を利用します。
+◯◯の代休です。
+            </x-input-field>
+<!--
+            <div class="mb-3">
+                コピペ用:<br />
+                有休を利用します。<br />
+                ◯◯の代休です。
+            </div>
+-->
             @auth
                 <x-input-label for="入力者" value="入力者:" />
                 <x-text-input placeholder="{{ Auth::user()->name }}" id="入力者" name="入力者" type="text" value="{{ Auth::user()->name }}"/>
