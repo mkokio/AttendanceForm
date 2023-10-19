@@ -19,7 +19,7 @@
                 <x-input-error class="mt-2" :messages="$errors->get('event_title')" />
             @endauth
 
-            <x-input-date name="入力日" for="入力日" label="入力日:" type="date" default="" required></x-input-date>
+            <x-input-date name="入力日" for="入力日" label="入力日:" type="date" value="{{ now()->format('Y-m-d') }}" required></x-input-date>
 
             <x-primary-button>{{ __('登録') }}</x-primary-button>
         </form>
