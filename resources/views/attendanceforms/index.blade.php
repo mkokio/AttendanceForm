@@ -6,9 +6,10 @@
             <x-input-date name="日付" for="日付" label="日付:" type="date"></x-input-date>
 
             <x-dropdown-list name="種別" placeholder="選択してください" for="種別" label="種別:">
-                <option value="オプション１">オプション１</option>
-                <option value="オプション２">オプション２</option>
-                <option value="オプション３">オプション３</option>
+                <option value="休暇">休暇</option>
+                <option value="遅刻">遅刻</option>
+                <option value="早退">早退</option>
+                <option value="その他">その他</option>
             </x-dropdown-list>
 
             <x-input-field name="その他備考" for="その他備考" label="その他備考:" type="text" rows="4" maxlength="1000"></x-input-field>

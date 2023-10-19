@@ -49,7 +49,9 @@ class AttendanceFormController extends Controller
         $endDate = $startDate->copy()->endOfDay();
 
         Event::create([
+            //Change to [{名前}] {種別}の形式で表⽰
             'name' => $request->input('入力者'), // 入力者
+            
             'startDate' => $startDate, // 日付 (Carbon instance)
             'endDate' => $endDate, // whole day event (Carbon instance)
             'description' => $request->input('種別') . "\n" . $request->input('その他備考'), // 種別 + \n + その他備考

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->date('日付')->nullable(false);
-            $table->enum('種別', ['オプション１', 'オプション２', 'オプション３']);
+            $table->enum('種別', ['休暇', '遅刻', '早退', 'その他']);
             $table->text('その他備考', 1000)->nullable();
             $table->string('入力者')->nullable(false);
             $table->date('入力日')->nullable(false);
