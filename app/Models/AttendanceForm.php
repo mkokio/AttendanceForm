@@ -23,5 +23,6 @@ class AttendanceForm extends Model
         'その他備考',
         '入力者',
         '入力日',
+        'タイプ'
     ];
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('その他備考', 1000)->nullable();
             $table->string('入力者')->nullable(false);
             $table->date('入力日')->nullable(false);
+            $table->enum('タイプ',['有給','残業']);
             $table->timestamps();
         });
     }

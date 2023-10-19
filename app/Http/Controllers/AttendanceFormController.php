@@ -40,6 +40,7 @@ class AttendanceFormController extends Controller
             'その他備考' => 'nullable|max:1000',
             '入力者' => 'required',
             '入力日' => 'required|date',
+            'タイプ' => 'required|in:有給,残業',
         ]);
     
         $request->user()->attendanceforms()->create($validated);
@@ -49,9 +50,8 @@ class AttendanceFormController extends Controller
         $endDate = $startDate->copy()->endOfDay();
 
         Event::create([
-            //Change to [{名前}] {種別}の形式で表⽰
+            //Change to [{名前}]休み{種別}の形式で表⽰
             'name' => $request->input('入力者'), // 入力者
-            
             'startDate' => $startDate, // 日付 (Carbon instance)
             'endDate' => $endDate, // whole day event (Carbon instance)
             'description' => $request->input('種別') . "\n" . $request->input('その他備考'), // 種別 + \n + その他備考
@@ -91,6 +91,7 @@ class AttendanceFormController extends Controller
             'その他備考' => 'nullable|max:1000',
             '入力者' => 'required',
             '入力日' => 'required|date',
+            'タイプ' => 'required|in:有給,残業',
         ]);
 
         $attendanceForm->update($validated);

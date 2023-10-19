@@ -23,6 +23,23 @@
                 ◯◯の代休です。
             </div>
 -->
+            <x-radio-button name="タイプ" id="radiotype1" value="有給">
+                <label class="form-check-label" for="有給">
+                    有給
+                </label>
+            </x-radio-button>
+
+            <x-radio-button name="タイプ" id="radiotype2" value="残業">
+                <label class="form-check-label" for="残業">
+                    残業
+                </label>
+            </x-radio-button>
+
+
+            <br />
+            <hr />
+            <br />
+
             @auth
                 <x-input-label for="入力者" value="入力者:" />
                 <x-text-input placeholder="{{ Auth::user()->name }}" id="入力者" name="入力者" type="text" value="{{ Auth::user()->name }}"/>
