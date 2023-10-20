@@ -23,6 +23,7 @@ Submitting the attendance form updates one single shared Google Calendar with a 
 8. Copy the Google Calendar ID GOOGLE_CALENDAR_ID= in .env file
 9. Configure .env to your preferred database
 10. [テストカレンダー](https://calendar.google.com/calendar/embed?src=d8bd7c59c9d6adcba8092336d21e4da22a8dcc408cb19344f9814f6081a9baa2%40group.calendar.google.com&ctz=Asia%2FTokyo) 
+11. config/app.php >> 'locale' => 'ja', //change to 'en' for English Version
 
 ## About Laravel
 
