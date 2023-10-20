@@ -12,18 +12,15 @@
                 <option value="その他">その他</option>
             </x-dropdown-list>
 
-            <x-input-field name="その他備考" for="その他備考" label="その他備考:" type="text" rows="4" maxlength="1000">
-                有休を利用します。
-◯◯の代休です。
-            </x-input-field>
-<!--
-            <div class="mb-3">
+            <x-input-field name="その他備考" for="その他備考" label="その他備考:" type="text" rows="4" maxlength="1000"></x-input-field>
+
+            <div class="mb-3 text-muted">
                 コピペ用:<br />
                 有休を利用します。<br />
                 ◯◯の代休です。
             </div>
--->
-            <x-radio-button name="タイプ" id="radiotype1" value="有給">
+
+            <x-radio-button name="タイプ" id="radiotype1" value="有給" checked>
                 <label class="form-check-label" for="有給">
                     有給
                 </label>
