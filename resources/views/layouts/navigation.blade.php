@@ -13,7 +13,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <x-nav-link :href="route('attendanceforms.index')" :active="request()->routeIs('attendanceforms.index')">
-                        {{ __('勤怠事前報告フォーム') }}
+                        {{ __('Attendance Form') }}
                     </x-nav-link>
                 </li>
             </ul>
@@ -25,12 +25,12 @@
                 {{ Auth::user()->name }}
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('プロファイル') }}</a></li>
+                <li><a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a></li>
                 <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button class="dropdown-item" type="submit" onclick="event.preventDefault(); this.closest('form').submit();">
-                            {{ __('ログアウト') }}
+                            {{ __('Log Out') }}
                         </button>
                     </form>
                 </li>

@@ -16,12 +16,12 @@
                 @if (Route::has('login'))
                     <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                         @auth
-                            <a href="{{ url('/attendanceforms') }}" class="btn btn-primary">勤怠事前報告フォーム </a>
+                            <a href="{{ url('/attendanceforms') }}" class="btn btn-primary">{{ __('Attendance Form') }}</a>
                         @else
-                            <a href="{{ route('login') }}" class="btn btn-primary">Log in</a>
+                            <a href="{{ route('login') }}" class="btn btn-primary">{{ __('Log in') }}</a>
     
                             @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="btn btn-secondary ml-4">Register</a>
+                                <a href="{{ route('register') }}" class="btn btn-secondary ml-4">{{ __('Register') }}</a>
                             @endif
                         @endauth
                     </div>
