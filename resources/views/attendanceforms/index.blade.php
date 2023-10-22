@@ -12,6 +12,11 @@
                 <option value="その他">{{ __('Other') }}</option>
             </x-dropdown-list>
 
+            <!-- "Free text" input field hidden unless 'Other' is selected -->
+            <div id="フリーテキスト" style="display: none;">
+                <x-input-field name="フリーテキスト" for="フリーテキスト" label="{{ __('Free Text:') }}" type="text" rows="4" maxlength="1000"></x-input-field>
+            </div>
+
             <x-input-field name="その他備考" for="その他備考" label="{{  __('Other Remarks:') }}" type="text" rows="4" maxlength="1000"></x-input-field>
 
             <div class="mb-3 text-muted">
@@ -51,4 +56,19 @@
             <x-primary-button>{{ __('Submit') }}</x-primary-button>
         </form>
     </div>
+    <script>
+        // Get the dropdown element and "free text" input container
+        const reasonDropdown = document.getElementById('種別');
+        const otherReasonContainer = document.getElementById('フリーテキスト');
+
+        // Add change event listener to the dropdown
+        reasonDropdown.addEventListener('change', function() {
+            // If "Other" is selected, show the "free text" input container; otherwise, hide it
+            if (reasonDropdown.value === 'その他') {
+                otherReasonContainer.style.display = 'block';
+            } else {
+                otherReasonContainer.style.display = 'none';
+            }
+        });
+    </script>
 </x-app-layout>
