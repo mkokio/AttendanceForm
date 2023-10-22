@@ -12,6 +12,21 @@
                 <option value="その他">{{ __('Other') }}</option>
             </x-dropdown-list>
 
+            <!-- "遅刻タイム" clock is hidden unless 'Arrive Late' is selected -->
+            <!-- Start time will be automatically 0:00 -->
+            <div id="lateTimeContainer" style="display: none;">
+                <label for="遅刻タイム" class="form-label">{{ __('Arrive Late:') }}</label>
+                <x-input-time for="遅刻タイム" />
+            </div>
+
+            <!-- "早退タイム" clock is hidden unless 'Leave Early' is selected -->
+            <!-- End time will be automatically 0:00 -->
+            <div id="earlyTimeContainer" style="display: none;">
+                <label for="早退タイム" class="form-label">{{ __('Leave Early:') }}</label>
+                <x-input-time for="早退タイム" />
+            </div>
+
+
             <!-- "Free text" input field hidden unless 'Other' is selected -->
             <div id="フリーテキスト" style="display: none;">
                 <x-input-field name="フリーテキスト" for="フリーテキスト" label="{{ __('Free Text:') }}" type="text" rows="4" maxlength="1000"></x-input-field>
@@ -19,7 +34,7 @@
 
             <x-input-field name="その他備考" for="その他備考" label="{{  __('Other Remarks:') }}" type="text" rows="4" maxlength="1000"></x-input-field>
 
-            <div class="mb-3 text-muted">
+            <div class="mb-3 text-secondary">
                 {{ __('For Copy-Pasting:') }}<br />
                 {{ __('Use Paid Leave') }}<br />
                 {{ __('Compensatory Day for...') }}
@@ -70,5 +85,24 @@
                 otherReasonContainer.style.display = 'none';
             }
         });
+
+        // Get the containers for "遅刻タイム" and "早退タイム"
+        const lateTimeContainer = document.getElementById('lateTimeContainer');
+        const earlyTimeContainer = document.getElementById('earlyTimeContainer');
+
+        // Add change event listener to the dropdown
+        reasonDropdown.addEventListener('change', function() {
+            // Hide both time containers by default
+            lateTimeContainer.style.display = 'none';
+            earlyTimeContainer.style.display = 'none';
+
+            // Check which option is selected and show the corresponding time container
+            if (reasonDropdown.value === '遅刻') {
+                lateTimeContainer.style.display = 'block';
+            } else if (reasonDropdown.value === '早退') {
+                earlyTimeContainer.style.display = 'block';
+            }
+        });
     </script>
+    
 </x-app-layout>
