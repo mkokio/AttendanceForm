@@ -37,6 +37,7 @@ class AttendanceFormController extends Controller
         $validated = $request->validate([
             '日付' => 'required|date',
             '種別' => 'required',
+            'フリーテキスト' => 'nullable|max:1000',
             'その他備考' => 'nullable|max:1000',
             '入力者' => 'required',
             '入力日' => 'required|date',
@@ -88,6 +89,7 @@ class AttendanceFormController extends Controller
         $validated = $request->validate([
             '日付' => 'required|date',
             '種別' => 'required',
+            'フリーテキスト' => 'nullable|max:1000',
             'その他備考' => 'nullable|max:1000',
             '入力者' => 'required',
             '入力日' => 'required|date',
