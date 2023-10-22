@@ -21,6 +21,7 @@ class AttendanceForm extends Model
         '日付',
         '種別',
         'その他備考',
+        'フリーテキスト',
         '入力者',
         '入力日',
         'タイプ'
