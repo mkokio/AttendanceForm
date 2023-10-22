@@ -24,6 +24,8 @@ class AttendanceForm extends Model
         'フリーテキスト',
         '入力者',
         '入力日',
-        'タイプ'
+        'タイプ',
+        '早退タイム',
+        '遅刻タイム'
     ];
 }

@@ -42,6 +42,8 @@ class AttendanceFormController extends Controller
             '入力者' => 'required',
             '入力日' => 'required|date',
             'タイプ' => 'required|in:有給,残業',
+            '早退タイム'=> 'date_format:H:i',     // leave early time (start time) as end time will be 23:59
+            '遅刻タイム'=> 'date_format:H:i',     // late arrival time (end time) as start time will be 0:00
         ]);
     
         $request->user()->attendanceforms()->create($validated);
@@ -94,6 +96,8 @@ class AttendanceFormController extends Controller
             '入力者' => 'required',
             '入力日' => 'required|date',
             'タイプ' => 'required|in:有給,残業',
+            '早退タイム'=> 'date_format:H:i',     // leave early time (start time) as end time will be 23:59
+            '遅刻タイム'=> 'date_format:H:i',     // late arrival time (end time) as start time will be 0:00
         ]);
 
         $attendanceForm->update($validated);
