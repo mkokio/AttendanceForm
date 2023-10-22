@@ -57,6 +57,9 @@ class AttendanceFormController extends Controller
             'name' => $request->input('入力者'), // 入力者
             'startDate' => $startDate, // 日付 (Carbon instance)
             'endDate' => $endDate, // whole day event (Carbon instance)
+            // leave early time (start time) as end time will be 23:59
+            // late arrival time (end time) as start time will be 0:00
+            // add フリーテキスト in description
             'description' => $request->input('種別') . "\n" . $request->input('その他備考'), // 種別 + \n + その他備考
             'colorId' => '6', // Orange color
             'visibility' => 'default',
