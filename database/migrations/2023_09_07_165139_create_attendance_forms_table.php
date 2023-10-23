@@ -22,8 +22,8 @@ return new class extends Migration
             $table->date('入力日')->nullable(false);
             $table->enum('タイプ',['有給','残業']);
             $table->timestamps();
-            $table->time('早退タイム');           // leave early time (start time) as end time will be 23:59
-            $table->time('遅刻タイム');     // late arrival time (end time) as start time will be 0:00
+            $table->time('早退タイム')->nullable();;           // leave early time (start time) as end time will be 23:59
+            $table->time('遅刻タイム')->nullable();;     // late arrival time (end time) as start time will be 0:00
         });
     }
 

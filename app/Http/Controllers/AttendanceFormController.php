@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
-
 use Spatie\GoogleCalendar\Event;
 use Carbon\Carbon;
+use App\Models\User;
 
 class AttendanceFormController extends Controller
 {
@@ -30,6 +30,14 @@ class AttendanceFormController extends Controller
     }
 
     /**
+    * "success" method
+    */
+    public function success()
+    {
+        return view('success');
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request): RedirectResponse
@@ -42,12 +50,11 @@ class AttendanceFormController extends Controller
             '入力者' => 'required',
             '入力日' => 'required|date',
             'タイプ' => 'required|in:有給,残業',
-            '早退タイム'=> 'date_format:H:i',     // leave early time (start time) as end time will be 23:59
-            '遅刻タイム'=> 'date_format:H:i',     // late arrival time (end time) as start time will be 0:00
+            '早退タイム'=>'nullable|date_format:H:i',     // leave early time (start time) as end time will be 23:59
+            '遅刻タイム'=> 'nullable|date_format:H:i',     // late arrival time (end time) as start time will be 0:00
         ]);
-    
+        
         $request->user()->attendanceforms()->create($validated);
-    
         $event = new Event();
         $startDate = Carbon::parse($request->input('日付'));
         $endDate = $startDate->copy()->endOfDay();
@@ -66,7 +73,9 @@ class AttendanceFormController extends Controller
             'status' => 'confirmed',
         ]);
 
-        return redirect(route('attendanceforms.index'));
+        // Redirect to a success page after db is updated and calendar event is created.
+        return redirect()->route('eventcreatesuccess');
+
     }
     /**
      * Display the specified resource.
@@ -117,4 +126,6 @@ class AttendanceFormController extends Controller
         $attendanceform->delete();
         return redirect(route('attendanceforms.index'));
     }
+
+
 }

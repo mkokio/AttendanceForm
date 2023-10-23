@@ -54,7 +54,7 @@
     "Attendance Form": "勤怠事前報告フォーム",
     "Submit": "登録",
     "Advance attendance report":"勤怠事前報告",
-    "Welcome": "",
+    "Welcome": "ようこそ",
     "Day Off": "休暇",
     "Arrive Late": "遅刻",
     "Leave Early": "早退",
@@ -74,5 +74,8 @@
     "Update your account's profile information and email address.": "アカウントのプロフィール情報と電子メール アドレスを更新します。",
     "Free Text:": "フリーテキスト:",
     "Arrive Late:": "遅刻タイム:",
-    "Leave Early:": "早退タイム:"
+    "Leave Early:": "早退タイム:",
+    "Event Created": "カレンダイベントを作りました!",
+    "You added your event on the Google Calendar.": "Googleカレンダーにイベントを追加しました。",
+    "Would you like to create another event?": "別のイベントを作成しますか？"
 }
