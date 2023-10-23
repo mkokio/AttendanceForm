@@ -50,15 +50,15 @@ class AttendanceFormController extends Controller
             '入力者' => 'required',
             '入力日' => 'required|date',
             'タイプ' => 'required|in:有給,残業',
-            '早退タイム'=>'nullable|date_format:H:i',     // leave early time (start time) as end time will be 23:59
-            '遅刻タイム'=> 'nullable|date_format:H:i',     // late arrival time (end time) as start time will be 0:00
+            '早退タイム'=>'nullable|date_format:H:i',    // leave early time (start time) as end time will be 23:59
+            '遅刻タイム'=> 'nullable|date_format:H:i',   // late arrival time (end time) as start time will be 0:00
         ]);
         
         $request->user()->attendanceforms()->create($validated);
+        
+        // Make a Google Calendar Event
         $event = new Event();
-        $startDate = Carbon::parse($request->input('日付'));
-        $endDate = $startDate->copy()->endOfDay();
-
+        
         // Parse date and time input (with Carbon library) from the request and adjust the timezone to Asia/Tokyo
         $startDate = Carbon::parse($request->input('日付'))->setTimezone('Asia/Tokyo');
         $endDate = Carbon::parse($request->input('日付'))->setTimezone('Asia/Tokyo');
@@ -82,13 +82,19 @@ class AttendanceFormController extends Controller
         $startDateTime = $startDate->copy()->setTime($startTime->hour, $startTime->minute, $startTime->second);
         $endDateTime = $endDate->copy()->setTime($endTime->hour, $endTime->minute, $endTime->second);
 
+        $user = $request->user();
+
         Event::create([
-            'name' => $request->input('入力者'),
+            'name' => '[' . $request->input('入力者') . ']' . "休み(" . $request->input('種別') . ")",  //　[島田]休み(休暇)
             'startDateTime' => $startDateTime,
             'endDateTime' => $endDateTime,
             'startDate' => $startDate, // 日付 (Carbon instance)
             'endDate' => $endDate, // whole day event (Carbon instance)
-            'description' => $request->input('種別') . "\n" . $request->input('その他備考'),
+            'description' => "その他備考: " . $request->input('その他備考') . "\n" . 
+                                "入力日: " . $request->input('入力日') . "\n" .
+                                "タイプ: " . $request->input('タイプ') . "\n" .
+                                "フリーテキスト: " . $request->input('フリーテキスト') . "\n" .
+                                "作成者: " . $user->name,
             'colorId' => '6', // Orange color
             'visibility' => 'default',
             'status' => 'confirmed',
@@ -96,7 +102,6 @@ class AttendanceFormController extends Controller
 
         // Redirect to a success page after db is updated and calendar event is created.
         return redirect()->route('eventcreatesuccess');
-
     }
     /**
      * Display the specified resource.
