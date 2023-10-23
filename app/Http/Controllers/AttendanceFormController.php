@@ -59,15 +59,36 @@ class AttendanceFormController extends Controller
         $startDate = Carbon::parse($request->input('日付'));
         $endDate = $startDate->copy()->endOfDay();
 
+        // Parse date and time input (with Carbon library) from the request and adjust the timezone to Asia/Tokyo
+        $startDate = Carbon::parse($request->input('日付'))->setTimezone('Asia/Tokyo');
+        $endDate = Carbon::parse($request->input('日付'))->setTimezone('Asia/Tokyo');
+
+        // Handle the time logic to set start and end times
+        if ($request->input('早退タイム')) {
+            // Only 早退タイム is provided, set it as the start time, and end time as 23:59.
+            $startTime = Carbon::parse($request->input('早退タイム'));
+            $endTime = $startDate->copy()->setTime(23, 59, 59);
+        } elseif ($request->input('遅刻タイム')) {
+            // Only 遅刻タイム is provided, set it as the end time, and start time as 0:00.
+            $startTime = $startDate->copy()->startOfDay();
+            $endTime = Carbon::parse($request->input('遅刻タイム'));
+        } else {
+            // Neither time is provided, it's a whole day event.
+            $startTime = $startDate->copy()->startOfDay();
+            $endTime = $startDate->copy()->endOfDay();
+        }
+
+        // Combine date and time components into datetime objects
+        $startDateTime = $startDate->copy()->setTime($startTime->hour, $startTime->minute, $startTime->second);
+        $endDateTime = $endDate->copy()->setTime($endTime->hour, $endTime->minute, $endTime->second);
+
         Event::create([
-            //Change to [{名前}]休み{種別}の形式で表⽰
-            'name' => $request->input('入力者'), // 入力者
+            'name' => $request->input('入力者'),
+            'startDateTime' => $startDateTime,
+            'endDateTime' => $endDateTime,
             'startDate' => $startDate, // 日付 (Carbon instance)
             'endDate' => $endDate, // whole day event (Carbon instance)
-            // leave early time (start time) as end time will be 23:59
-            // late arrival time (end time) as start time will be 0:00
-            // add フリーテキスト in description
-            'description' => $request->input('種別') . "\n" . $request->input('その他備考'), // 種別 + \n + その他備考
+            'description' => $request->input('種別') . "\n" . $request->input('その他備考'),
             'colorId' => '6', // Orange color
             'visibility' => 'default',
             'status' => 'confirmed',
