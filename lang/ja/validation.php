@@ -10,7 +10,7 @@ return [
     | 以下の言語行はバリデタークラスにより使用されるデフォルトのエラー
     | メッセージです。サイズルールのようにいくつかのバリデーションを
     | 持っているものもあります。メッセージはご自由に調整してください。
-    |
+    | SOURCE: https://readouble.com/laravel/8.x/ja/validation-php.html
     */
 
     'accepted'             => ':attributeを承認してください。',
