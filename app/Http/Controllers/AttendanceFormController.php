@@ -42,11 +42,12 @@ class AttendanceFormController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // https://laravel.com/docs/10.x/validation#available-validation-rules
         $validated = $request->validate([
             '日付' => 'required|date',
-            '種別' => 'required',
-            'フリーテキスト' => 'nullable|max:1000',
-            'その他備考' => 'nullable|max:1000',
+            '種別' => 'required|in:休暇,遅刻,早退,その他',
+            'フリーテキスト' => 'nullable|max:1000', //should this be required?
+            'その他備考' => 'required|max:1000',    //should this be required?
             '入力者' => 'required',
             '入力日' => 'required|date',
             'タイプ' => 'required|in:有給,残業',

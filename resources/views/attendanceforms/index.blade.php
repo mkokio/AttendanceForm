@@ -2,8 +2,11 @@
     <div>
         <form method="POST" action="{{ route('attendanceforms.store') }}">
             @csrf
-
+            
             <x-input-date name="日付" for="日付" label="{{ __('Date') }}" type="date"></x-input-date>
+            <x-input-error class="t-0" :messages="$errors->get('日付')" />
+            
+
 
             <x-dropdown-list name="種別" placeholder="{{  __('Please select') }}" for="種別" label="{{ __('Type:') }}">
                 <option value="休暇">{{ __('Day Off') }}</option>
@@ -11,12 +14,14 @@
                 <option value="早退">{{ __('Leave Early') }}</option>
                 <option value="その他">{{ __('Other') }}</option>
             </x-dropdown-list>
+            <x-input-error class="t-0" :messages="$errors->get('種別')" />
 
             <!-- "遅刻タイム" clock is hidden unless 'Arrive Late' is selected -->
             <!-- Start time will be automatically 0:00 -->
             <div id="lateTimeContainer" style="display: none;">
                 <label for="遅刻タイム" class="form-label">{{ __('Arrive Late:') }}</label>
                 <x-input-time for="遅刻タイム" />
+                <x-input-error class="mt-2" :messages="$errors->get('遅刻タイム')" /> //Can't trigger this error because nullable
             </div>
 
             <!-- "早退タイム" clock is hidden unless 'Leave Early' is selected -->
@@ -24,6 +29,7 @@
             <div id="earlyTimeContainer" style="display: none;">
                 <label for="早退タイム" class="form-label">{{ __('Leave Early:') }}</label>
                 <x-input-time for="早退タイム" />
+                <x-input-error class="mt-2" :messages="$errors->get('早退タイム')" /> //Can't trigger this error because nullable
             </div>
 
 
@@ -33,8 +39,11 @@
             </div>
 
             <x-input-field name="その他備考" for="その他備考" label="{{  __('Other Remarks:') }}" type="text" rows="4" maxlength="1000"></x-input-field>
+            <x-input-error class="t-0" :messages="$errors->get('その他備考')" />
+
 
             <div class="mb-3 text-secondary">
+                <br />
                 {{ __('For Copy-Pasting:') }}<br />
                 {{ __('Use Paid Leave') }}<br />
                 {{ __('Compensatory Day for...') }}
@@ -56,18 +65,19 @@
                 </label>
             </x-radio-button>
 
-
-            <br />
-            <hr />
             <br />
 
             @auth
                 <x-input-label for="入力者" value="{{  __('Created by:') }}" />
                 <x-text-input placeholder="{{ Auth::user()->name }}" id="入力者" name="入力者" type="text" value="{{ Auth::user()->name }}"/>
             @endauth
+            <x-input-error class="t-0" :messages="$errors->get('入力者')" />
+                
 
-            <x-input-date name="入力日" for="入力日" label="{{  __('Created on:') }}" type="date" value="{{ now()->format('Y-m-d') }}" required></x-input-date>
-
+            <x-input-date name="入力日" for="入力日" label="{{  __('Created on:') }}" type="date" value="{{ now()->format('Y-m-d') }}" ></x-input-date>
+            <x-input-error class="t-0" :messages="$errors->get('入力日')" />
+            
+            <br />
             <x-primary-button>{{ __('Submit') }}</x-primary-button>
         </form>
     </div>
