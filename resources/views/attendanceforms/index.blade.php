@@ -1,4 +1,9 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-weight-bold text-xl text-gray-800 leading-tight">
+            {{ Auth::user()->name }}{{ __('\'s Attendance Form') }}
+        </h2>
+    </x-slot>
     <div>
         <form method="POST" action="{{ route('attendanceforms.store') }}">
             @csrf
