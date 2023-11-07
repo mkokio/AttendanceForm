@@ -10,8 +10,6 @@
             
             <x-input-date name="日付" for="日付" label="{{ __('Date') }}" type="date"></x-input-date>
             <x-input-error class="t-0" :messages="$errors->get('日付')" />
-            
-
 
             <x-dropdown-list name="種別" placeholder="{{  __('Please select') }}" for="種別" label="{{ __('Type:') }}">
                 <option value="休暇">{{ __('Day Off') }}</option>
@@ -24,19 +22,18 @@
             <!-- "遅刻タイム" clock is hidden unless 'Arrive Late' is selected -->
             <!-- Start time will be automatically 0:00 -->
             <div id="lateTimeContainer" style="display: none;">
-                <label for="遅刻タイム" class="form-label">{{ __('Arrive Late:') }}</label>
+                <label for="遅刻タイム" class="mt-3 b-0">{{ __('Arrive Late:') }}</label>
                 <x-input-time for="遅刻タイム" />
-                <x-input-error class="mt-2" :messages="$errors->get('遅刻タイム')" /> //Can't trigger this error because nullable
+                <x-input-error class="mt-2" :messages="$errors->get('遅刻タイム')" /> <!-- Can't trigger this error because nullable -->
             </div>
 
             <!-- "早退タイム" clock is hidden unless 'Leave Early' is selected -->
             <!-- End time will be automatically 0:00 -->
             <div id="earlyTimeContainer" style="display: none;">
-                <label for="早退タイム" class="form-label">{{ __('Leave Early:') }}</label>
+                <label for="早退タイム" class="mt-3 b-0">{{ __('Leave Early:') }}</label>
                 <x-input-time for="早退タイム" />
-                <x-input-error class="mt-2" :messages="$errors->get('早退タイム')" /> //Can't trigger this error because nullable
+                <x-input-error class="mt-2" :messages="$errors->get('早退タイム')" /> <!-- Can't trigger this error because nullable -->
             </div>
-
 
             <!-- "Free text" input field hidden unless 'Other' is selected -->
             <div id="フリーテキスト" style="display: none;">
@@ -45,7 +42,6 @@
 
             <x-input-field name="その他備考" for="その他備考" label="{{  __('Other Remarks:') }}" type="text" rows="4" maxlength="1000"></x-input-field>
             <x-input-error class="t-0" :messages="$errors->get('その他備考')" />
-
 
             <div class="mb-3 text-secondary">
                 <br />
@@ -118,6 +114,5 @@
                 earlyTimeContainer.style.display = 'block';
             }
         });
-    </script>
-    
+    </script>  
 </x-app-layout>
