@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <!-- Logo -->
-        <x-application-logo class="h-9 w-auto text-gray-800" />
+        <x-application-logo />
         
         <!-- User Dropdown -->
         <div class="dropdown">
