@@ -99,7 +99,7 @@ class AttendanceFormController extends Controller
                 $descriptionItems[] = e("フリーテキスト: " . $request->input('フリーテキスト'));
             }
             if ($user->name){
-                $descriptionItems[] = e("作成者: " . $user->name);
+                $descriptionItems[] = e("対象者: " . $user->name);
             }
 
             $description = implode("\n", $descriptionItems);
@@ -115,7 +115,7 @@ class AttendanceFormController extends Controller
                                 "入力日: " . $request->input('入力日') . "\n" .
                                 "タイプ: " . $request->input('タイプ') . "\n" .
                                 "フリーテキスト: " . $request->input('フリーテキスト') . "\n" .
-                                "作成者: " . $user->name,*/
+                                "対象者: " . $user->name,*/
             'colorId' => '6', // Orange color
             'visibility' => 'default',
             'status' => 'confirmed',

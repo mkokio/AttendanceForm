@@ -69,7 +69,7 @@
             <br />
 
             @auth
-                <x-input-label for="入力者" value="{{  __('Created by:') }}" />
+                <x-input-label for="入力者" value="{{  __('Created by: ') }}" />
                 <x-text-input placeholder="{{ Auth::user()->name }}" id="入力者" name="入力者" type="text" value="{{ Auth::user()->name }}"/>
             @endauth
             <x-input-error class="t-0" :messages="$errors->get('入力者')" />
