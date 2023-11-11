@@ -78,5 +78,6 @@
     "Event Created": "カレンダイベントを作りました!",
     "You added your event on the Google Calendar.": "Googleカレンダーにイベントを追加しました。",
     "Would you like to create another event?": "別のイベントを作成しますか？",
-    "'s Attendance Form": "の勤怠事前報告フォーム"
+    "'s Attendance Form": "の勤怠事前報告フォーム",
+    "Free Text is required for 'Other' option.": "「その他」オプションにはフリーテキストが必要です。"
 }

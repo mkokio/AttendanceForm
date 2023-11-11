@@ -38,6 +38,8 @@
             <!-- "Free text" input field hidden unless 'Other' is selected -->
             <div id="フリーテキスト" style="display: none;">
                 <x-input-field name="フリーテキスト" for="フリーテキスト" label="{{ __('Free Text:') }}" type="text" rows="4" maxlength="1000"></x-input-field>
+                <!-- INCOMPLETE trigger error if その他 is selected and フリーテキスト is blank -->
+                <x-input-error class="t-0" :messages="$errors->get('フリーテキスト')" />
             </div>
 
             <x-input-field name="その他備考" for="その他備考" label="{{  __('Other Remarks:') }}" type="text" rows="4" maxlength="1000"></x-input-field>
