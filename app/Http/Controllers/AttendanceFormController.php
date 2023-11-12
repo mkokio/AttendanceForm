@@ -65,6 +65,7 @@ class AttendanceFormController extends Controller
         $endDate = Carbon::parse($request->input('日付'))->setTimezone('Asia/Tokyo');
 
         // Handle the time logic to set start and end times
+        // CLEAN THIS SECTION UP IF ACTUAL TIMES ARE NOT NEEDED (i.e. every event is "whole day" regardless)
         if ($request->input('早退タイム')) {
             // Only 早退タイム is provided, set it as the start time, and end time as 23:59.
             $startTime = Carbon::parse($request->input('早退タイム'));
@@ -85,6 +86,7 @@ class AttendanceFormController extends Controller
 
         $user = $request->user();
 
+        // Build each necessary item of the description
         $descriptionItems = [];
             if ($request->input('その他備考')){
                 $descriptionItems[] = e("その他備考: " . $request->input('その他備考'));
@@ -102,8 +104,10 @@ class AttendanceFormController extends Controller
                 $descriptionItems[] = e("対象者: " . $user->name);
             }
 
+        // String the description items together
         $description = implode("\n", $descriptionItems);
         
+        // Build each necessary item of the title
         $nameItems = [];
         $nameItems[] = '[' . $request->input('入力者') . ']';
             if ($request->input('早退タイム')){
@@ -116,6 +120,7 @@ class AttendanceFormController extends Controller
                 $nameItems[] = '休み(' . $request->input('種別') . ')';
             }
 
+        // String the title items together
         $name = e(implode(' ', $nameItems));
         
         Event::create([
