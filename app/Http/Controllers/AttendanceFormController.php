@@ -102,20 +102,29 @@ class AttendanceFormController extends Controller
                 $descriptionItems[] = e("対象者: " . $user->name);
             }
 
-            $description = implode("\n", $descriptionItems);
+        $description = implode("\n", $descriptionItems);
+        
+        $nameItems = [];
+        $nameItems[] = '[' . $request->input('入力者') . ']';
+            if ($request->input('早退タイム')){
+                $nameItems[] = '早退(' . $request->input('早退タイム') . ')';
+            }
+            elseif ($request->input('遅刻タイム')){
+                $nameItems[] = '遅刻(' . $request->input('遅刻タイム') . ')';
+            }
+            else {
+                $nameItems[] = '休み(' . $request->input('種別') . ')';
+            }
 
+        $name = e(implode(' ', $nameItems));
+        
         Event::create([
-            'name' => '[' . $request->input('入力者') . ']' . "休み(" . $request->input('種別') . ")",  //　[島田]休み(休暇)
+            'name' => $name,  //　[島田]休み(休暇) or [島田]早退(3:00PM) or [島田]遅刻(9:00AM) 
             'startDateTime' => $startDateTime,
             'endDateTime' => $endDateTime,
             'startDate' => $startDate, // 日付 (Carbon instance)
             'endDate' => $endDate, // whole day event (Carbon instance)
             'description' => $description,
-                                /*"その他備考: " . $request->input('その他備考') . "\n" . 
-                                "入力日: " . $request->input('入力日') . "\n" .
-                                "タイプ: " . $request->input('タイプ') . "\n" .
-                                "フリーテキスト: " . $request->input('フリーテキスト') . "\n" .
-                                "対象者: " . $user->name,*/
             'colorId' => '6', // Orange color
             'visibility' => 'default',
             'status' => 'confirmed',
