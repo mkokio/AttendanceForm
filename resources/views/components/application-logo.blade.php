@@ -1,1 +1,1 @@
-<img src="{{ asset('mlogo.png') }}" alt="logo of the letter m in orange" title="A beautiful logo">
+<img src="{{ asset('mlogo.png') }}" alt="{{ __('An orange letter m as a logo') }}" title="A beautiful logo">
