@@ -116,6 +116,9 @@ class AttendanceFormController extends Controller
             elseif ($request->input('遅刻タイム')){
                 $nameItems[] = '遅刻(' . $request->input('遅刻タイム') . ')';
             }
+            elseif ($request->input('種別') === 'その他'){
+                $nameItems[] = 'その他';
+            }
             else {
                 $nameItems[] = '休み(' . $request->input('種別') . ')';
             }
