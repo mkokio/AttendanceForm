@@ -20,7 +20,6 @@
             <x-input-error class="t-0" :messages="$errors->get('種別')" />
 
             <!-- "遅刻タイム" clock is hidden unless 'Arrive Late' is selected -->
-            <!-- Start time will be automatically 0:00 -->
             <div id="lateTimeContainer" style="display: none;">
                 <label for="遅刻タイム" class="mt-3 b-0">{{ __('Arrive Late:') }}</label>
                 <x-input-time for="遅刻タイム" />
@@ -28,7 +27,6 @@
             </div>
 
             <!-- "早退タイム" clock is hidden unless 'Leave Early' is selected -->
-            <!-- End time will be automatically 0:00 -->
             <div id="earlyTimeContainer" style="display: none;">
                 <label for="早退タイム" class="mt-3 b-0">{{ __('Leave Early:') }}</label>
                 <x-input-time for="早退タイム" />
