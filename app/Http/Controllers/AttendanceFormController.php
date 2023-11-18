@@ -51,8 +51,8 @@ class AttendanceFormController extends Controller
             '入力者' => 'required',
             '入力日' => 'required|date',
             'タイプ' => 'required|in:有給,残業',
-            '早退タイム'=>'nullable|date_format:H:i',    // leave early time (start time) as end time will be 23:59
-            '遅刻タイム'=> 'nullable|date_format:H:i',   // late arrival time (end time) as start time will be 0:00
+            '早退タイム'=>'nullable|date_format:H:i',  
+            '遅刻タイム'=> 'nullable|date_format:H:i',
         ]);
         
         $request->user()->attendanceforms()->create($validated);
@@ -106,6 +106,7 @@ class AttendanceFormController extends Controller
         // String the title items together
         $name = e(implode(' ', $nameItems));
         
+        // Create the event using Spatie's Google Calendar
         Event::create([
             'name' => $name,  //　[島田]休み(休暇) or [島田]早退(3:00PM) or [島田]遅刻(9:00AM) 
             'startDate' => $startDate, // 日付 (Carbon instance)
@@ -119,6 +120,7 @@ class AttendanceFormController extends Controller
         // Redirect to a success page after db is updated and calendar event is created.
         return redirect()->route('eventcreatesuccess');
     }
+    
     /**
      * Display the specified resource.
      */
