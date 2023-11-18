@@ -49,13 +49,15 @@
                 {{ __('Use Paid Leave') }}<br />
                 {{ __('Compensatory Day for...') }}
             </div>-->
+            
             <br>
             <div class="mb-2 text-secondary">
-                {{ __('For Copy-Pasting:') }}
+                <div class="mb-2">
+                    {{ __('For Copy-Pasting:') }}
+                </div>
                 <div class="row g-3 align-items-center">
                     <div class="col-auto">
-                        <!-- The button used to copy the text -->
-                        <button type="button" onclick="copyText('有休')" class="btn btn-outline-secondary mb-2">{{  _('Copy') }}</button>
+                        <button type="button" onclick="copyText('有休')" class="btn btn-outline-secondary mb-2">コピー</button>
                     </div>
                     <div class="col-auto">
                         <div id="有休" class="mb-1">{{ __('Use Paid Leave') }}</div>
@@ -63,8 +65,7 @@
                 </div>
                 <div class="row g-3 align-items-center">
                     <div class="col-auto">
-                        <!-- The button used to copy the text -->
-                        <button type="button" onclick="copyText('代休')" class="btn btn-outline-secondary mb-2 ">{{  _('Copy') }}</button>
+                        <button type="button" onclick="copyText('代休')" class="btn btn-outline-secondary mb-2 ">コピー</button><!--&rarr;-->
                     </div>
                     <div class="col-auto">
                         <div id="代休" class="mb-1">{{ __('Compensatory Day for...') }}</div>
@@ -96,7 +97,7 @@
             <x-input-error class="t-0" :messages="$errors->get('入力者')" />
                 
 
-            <x-input-date name="入力日" for="入力日" label="{{  __('Created on:') }}" type="date" value="{{ now()->format('Y-m-d') }}" ></x-input-date>
+            <x-input-date name="入力日" for="入力日" label="{{  __('Created on: ') }}" type="date" value="{{ now()->format('Y-m-d') }}" ></x-input-date>
             <x-input-error class="t-0" :messages="$errors->get('入力日')" />
             
             <br />
