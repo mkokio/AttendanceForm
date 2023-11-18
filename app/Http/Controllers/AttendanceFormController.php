@@ -110,10 +110,10 @@ class AttendanceFormController extends Controller
         // Build each necessary item of the title
         $nameItems = [];
         $nameItems[] = '[' . $request->input('入力者') . ']';
-            if ($request->input('早退タイム')){
+            if ($request->input('種別') === '早退'){
                 $nameItems[] = '早退(' . $request->input('早退タイム') . ')';
             }
-            elseif ($request->input('遅刻タイム')){
+            elseif ($request->input('種別') === '遅刻'){
                 $nameItems[] = '遅刻(' . $request->input('遅刻タイム') . ')';
             }
             elseif ($request->input('種別') === 'その他'){
