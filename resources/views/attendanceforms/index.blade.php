@@ -43,14 +43,35 @@
             <x-input-field name="その他備考" for="その他備考" label="{{  __('Other Remarks:') }}" type="text" rows="4" maxlength="1000"></x-input-field>
             <x-input-error class="t-0" :messages="$errors->get('その他備考')" />
 
-            <div class="mb-3 text-secondary">
+            <!--<div class="mb-2 text-secondary">
                 <br />
                 {{ __('For Copy-Pasting:') }}<br />
                 {{ __('Use Paid Leave') }}<br />
                 {{ __('Compensatory Day for...') }}
+            </div>-->
+            <br>
+            <div class="mb-2 text-secondary">
+                {{ __('For Copy-Pasting:') }}
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <!-- The button used to copy the text -->
+                        <button type="button" onclick="copyText('有休')" class="btn btn-outline-secondary mb-2">{{  _('Copy') }}</button>
+                    </div>
+                    <div class="col-auto">
+                        <div id="有休" class="mb-1">{{ __('Use Paid Leave') }}</div>
+                    </div>
+                </div>
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <!-- The button used to copy the text -->
+                        <button type="button" onclick="copyText('代休')" class="btn btn-outline-secondary mb-2 ">{{  _('Copy') }}</button>
+                    </div>
+                    <div class="col-auto">
+                        <div id="代休" class="mb-1">{{ __('Compensatory Day for...') }}</div>
+                    </div>
+                </div>
             </div>
-
-            <br />
+            
             <hr />
             <br />
 
@@ -114,5 +135,19 @@
                 earlyTimeContainer.style.display = 'block';
             }
         });
+
+        //from https://www.w3schools.com/howto/howto_js_copy_clipboard.asp
+        function copyText(elementId) {
+            var textToCopy = document.getElementById(elementId).innerText;
+
+            // Copy the text to the clipboard
+            navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+                console.log('Text copied successfully: ' + textToCopy);
+            })
+            .catch(err => {
+                console.error('Unable to copy text: ', err);
+            });
+        }
     </script>  
 </x-app-layout>
