@@ -64,26 +64,6 @@ class AttendanceFormController extends Controller
         $startDate = Carbon::parse($request->input('日付'))->setTimezone('Asia/Tokyo');
         $endDate = Carbon::parse($request->input('日付'))->setTimezone('Asia/Tokyo');
 
-        // Handle the time logic to set start and end times
-        // CLEAN THIS SECTION UP IF ACTUAL TIMES ARE NOT NEEDED (i.e. every event is "whole day" regardless)
-        if ($request->input('早退タイム')) {
-            // Only 早退タイム is provided, set it as the start time, and end time as 23:59.
-            $startTime = Carbon::parse($request->input('早退タイム'));
-            $endTime = $startDate->copy()->setTime(23, 59, 59);
-        } elseif ($request->input('遅刻タイム')) {
-            // Only 遅刻タイム is provided, set it as the end time, and start time as 0:00.
-            $startTime = $startDate->copy()->startOfDay();
-            $endTime = Carbon::parse($request->input('遅刻タイム'));
-        } else {
-            // Neither time is provided, it's a whole day event.
-            $startTime = $startDate->copy()->startOfDay();
-            $endTime = $startDate->copy()->endOfDay();
-        }
-
-        // Combine date and time components into datetime objects
-        $startDateTime = $startDate->copy()->setTime($startTime->hour, $startTime->minute, $startTime->second);
-        $endDateTime = $endDate->copy()->setTime($endTime->hour, $endTime->minute, $endTime->second);
-
         $user = $request->user();
 
         // Build each necessary item of the description
@@ -128,8 +108,6 @@ class AttendanceFormController extends Controller
         
         Event::create([
             'name' => $name,  //　[島田]休み(休暇) or [島田]早退(3:00PM) or [島田]遅刻(9:00AM) 
-            'startDateTime' => $startDateTime,
-            'endDateTime' => $endDateTime,
             'startDate' => $startDate, // 日付 (Carbon instance)
             'endDate' => $endDate, // whole day event (Carbon instance)
             'description' => $description,
